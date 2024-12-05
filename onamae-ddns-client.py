@@ -37,15 +37,6 @@ def get_global_ip():
         print(e)
         raise Exception("%s: %s" % (e.reason, url))
 
-def read_env(file):
-    ret = defaultdict(str)
-    with open(file) as f:
-        for l in f.readlines():
-            k, v = l.rstrip().split('=')
-            if len(v):
-                ret[k] = v
-    return ret
-
 def connect(sock, server, port):
     sock.connect((server, port))
     return sock.recv(1024)
@@ -111,12 +102,11 @@ def update_domain_ip(env, ip):
 
 if __name__ == '__main__':
     try:
-        env_file = '.env'
-        if not os.path.exists(env_file):
-            print('File not found: %s' % env_file)
-            exit(1)
-
-        env = read_env(env_file)
+        env = defaultdict(str)
+        env['USERID'] = <your user id>
+        env['PASSWORD'] = <your password>
+        env['HOSTNAME'] = <your hostname>
+        env['DOMNAME'] = <your domain name>
         ip = get_global_ip()
         update_domain_ip(env, ip)
     except Exception as e:
