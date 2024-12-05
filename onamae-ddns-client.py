@@ -29,7 +29,7 @@ class OnamaeDDNSError(Exception):
         super(OnamaeDDNSError, self).__init__("%s: %s" % (reason, code))
 
 def get_global_ip():
-    url = 'https://ifconfig.me'
+    url = 'https://ipinfo.io/ip'
     try:
         res = urllib2.urlopen(url, timeout = 5)
         return res.read()
